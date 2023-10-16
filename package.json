@@ -1,0 +1,22 @@
+{
+  "name": "test_jenkins",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GS11223344/test_jenkins.git"
+  },
+  "author": "gs112233",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/GS11223344/test_jenkins/issues"
+  },
+  "homepage": "https://github.com/GS11223344/test_jenkins#readme",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
