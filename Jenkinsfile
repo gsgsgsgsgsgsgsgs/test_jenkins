@@ -1,23 +1,20 @@
-
-
 pipeline {
-    agent {
-        docker {
-            image 'node:latest'
-            args '-p 3000:3000 '
-
-        }
-    }
+    agent any
     stages {
         stage('Build') {
             steps {
-                sh 'node --version'
-                sh 'npm install --cache="/tmp/.YourCustomCacheDirectoryName"'
+                sh 'npm --version'
+                sh 'npm install'
             }
         }
-        stage('Test') { 
+        stage('Test') {
             steps {
-                sh 'npm test' 
+                sh 'npm test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo "Deploy..."
             }
         }
     }
