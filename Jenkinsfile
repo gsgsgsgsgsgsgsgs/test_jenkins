@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'npm --version'
                 sh 'rm -rf node_modules'
                 sh 'npm install'
             }
@@ -20,4 +19,3 @@ pipeline {
         }
     }
 }
-
