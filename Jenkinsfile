@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF} run started')
                 sh 'npm install'
             }
         }
@@ -13,7 +14,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'echo "Deploy..."'
+                echo "Deploy..."
             }
         }
     }
