@@ -1,20 +1,42 @@
+// pipeline {
+//     agent any
+//     stages {
+//         stage('Build') {
+//             steps {
+//                 sh 'npm install'
+//             }
+//         }
+//         stage('Test') {
+//             steps {
+//                 sh 'npm test'
+//             }
+//         }
+//         stage('Deploy') {
+//             steps {
+//                 echo "Deploy..."
+//             }
+//         }
+//     }
+// }
+
+
+
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18.18.1-alpine3.18' 
+            args '-p 3000:3000' 
+        }
+    }
     stages {
-        stage('Build') {
+        stage('Build') { 
             steps {
-                gitHubPRStatus githubPRMessage('${GITHUB_PR_COND_REF} run started')
-                sh 'npm install'
+                sh 'npm install' 
             }
         }
         stage('Test') {
             steps {
                 sh 'npm test'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo "Deploy..."
             }
         }
     }
