@@ -6,8 +6,6 @@ pipeline {
                 sh 'rm -rf node_modules'
                 sh 'npm install'
                 sh 'npm test'
-                githubPRStatusPublisher buildMessage: message(failureMsg: githubPRMessage('Can\'t set status; build failed.'), successMsg: githubPRMessage('Can\'t set status; build succeeded.')), statusMsg: githubPRMessage('${GITHUB_PR_COND_REF} run ended'), unstableAs: 'FAILURE'
-
             }
         }
         stage('Test') {
@@ -21,4 +19,23 @@ pipeline {
             }
         }
     }
+    post{
+        success{
+            setBuildStatus("Build succeeded", "SUCCESS");
+        }
+
+        failure {
+            setBuildStatus("Build failed", "FAILURE");
+        } 
+    }
+}
+
+void setBuildStatus(String message, String state) {
+    step([
+        $class: "GitHubCommitStatusSetter",                          
+        reposSource: [$class: "ManuallyEnteredRepositorySource", url: "https://github.com/gsgsgsgsgsgsgsgs/test_jenkins"],
+        contextSource: [$class: "ManuallyEnteredCommitContextSource", context: "ci/jenkins/build-status"],
+        errorHandlers: [[$class: "ChangingBuildStatusErrorHandler", result: "UNSTABLE"]],
+        statusResultSource: [$class: "ConditionalStatusResultSource", results: [[$class: "AnyBuildResult", message: message, state: state]]]
+    ]);
 }
