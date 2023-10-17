@@ -5,6 +5,6 @@ test('string with a single number should result in the number itself', () => {
   });
 
 
-// test('string with a single number should result in the number itself', () => {
-//     expect(calculator.add('2,2')).toBe(5);
-//   });
+test('string with a single number should result in the number itself', () => {
+    expect(calculator.add('2,2')).toBe(5);
+  });
