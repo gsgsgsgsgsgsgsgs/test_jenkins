@@ -3,7 +3,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'rm -rf node_modules'
                 sh 'npm install'
                 sh 'node --version'
             }
@@ -27,6 +26,10 @@ pipeline {
         failure {
             setBuildStatus("Build failed", "FAILURE");
         } 
+        cleanup {
+            echo "Cleaning the workspace"
+            cleanWs()
+        }
     }
 }
 
