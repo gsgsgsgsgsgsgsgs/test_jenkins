@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh 'rm -rf node_modules'
                 sh 'npm install'
-                sh 'npm test'
+                sh 'node --version'
             }
         }
         stage('Test') {
